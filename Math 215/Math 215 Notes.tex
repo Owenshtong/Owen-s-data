@@ -1,0 +1,1020 @@
+\documentclass[9pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{xeCJK}
+\usepackage{amsfonts}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\fundmx}[1]{\overline{\underline{X}}}
+\newcommand{\newmatrix}[2]{\left[
+                            \begin{matrix}
+                            	{#1}\\
+                            	{#2}\\
+                            \end{matrix}
+                           \right]}
+
+\usepackage[left=1in,top=1in,right=1in,foot=1in]{geometry}
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+\renewcommand{\arraystretch}{1.1}
+\setlength\parindent{0in}
+\pagestyle{empty}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}
+
+\setCJKmainfont{Kai}
+
+
+\begin{document}
+
+\large{\textbf{Math 215 Notes}}
+
+% \normalsize
+% Financial Math Chapter 4.1
+
+\medskip
+
+\begin{tabular*}{6.5in}{c}
+\hline
+\end{tabular*}
+
+\bigskip
+
+\begin{changemargin}{-0.125in}{0in}
+
+ \begin{enumerate}
+ 
+	\item \textbf{Linear differential equation}
+	
+	\medskip
+	
+	We define the linear form of differential equation as 
+	\[
+	y' + p(x) y  = f(x)
+	\]
+    Liner means the the DE is linear in $y'$ and $y$. Since it is not separable, we imply the method \textit{integrating factor} $r(t)$ which is to construct a total derivative of $r(t)\cdot y$. We want a $r(x)$ satisfying 
+    \[
+    y' \cdot r(x) + y\cdot r(x)p(x) = f(x)r(t)
+    \]
+    where $r(x)p(x) = r'(x)$. Then for convenience, we consider $p(x) = p$ instead, we can get 
+    \[
+    r(t) = e^{\int p \,\,dt}
+    \]
+    then the DE becomes 
+    \[
+    \frac{d}{dx} [r(x)y(x)] = f(x)\cdot r(x) \implies r(x)y(x) = \int  f(x)\cdot r(x)\,\,dx
+    \]
+    which is solvable.
+    
+    \medskip
+    
+    
+     
+     \item \textbf{Non-linear exact differential equation}
+     
+     \medskip
+     
+     
+     Let form of deferential equation to be 
+     \[
+     M(x,y) \, dx + N(x,y)\, dy = 0 \,\,\,\implies\,\,\, M(x,y)\, + N(x,y)\, \frac{dy}{dx}= 0 
+     \]
+    \theoremstyle{definition}
+    \begin{definition}{Exact deferential equation} \textit{A DE is called \textit{exact} if there is a potential function $\phi(x,y)$ s.t. M = $\phi_x$ and N = $\phi_y$.}
+    \end{definition}
+    
+    \medskip
+    
+    \theoremstyle{theorem}
+    \begin{theorem}
+     If $M_y = N_x$, then near any point $(x_0,y_0)$ (locally) there is a function $\phi(x,y)$ so that $\phi_x = M$ and $\phi_y = N$.
+    \end{theorem}
+     which generate the way to check whether a DE is exact of not. Notice this does not works globally. 
+     
+     \medskip
+     
+     \begin{enumerate}
+         \item \textbf{Solving the exact DE}
+     
+       \circled{1} Applying theorem 1 to check the exact-ability of the DE.\\
+       \circled{2} Because of the existence of the potential function, let 
+       \[
+       \phi(x,y) = \int M(x,y)\,dx = Q(x,y) + h(y)
+       \]
+       since \textit{M} is generated from the partial diri. of $\phi$, so the integral is w.r.t $x$ and the constant term may include $y$.\\
+       \circled{3} we get $\phi$ so far. Then we have 
+       \[
+       \phi_y(x,y) = \frac{d}{dy} [Q(x,y)+h(y)] = Q_y(x,y) + h'(y) \,\,\, = \,\,\, N(x,y)
+       \]
+       then h'(y) = N(x,y) - $Q_y$. Then we know both $Q(x,y)$ and $h(y)$ which gives implicit form of $\phi(x,y)$. 
+       
+       \medskip
+       
+       \item \textbf{Case for inexact differential equation}
+       
+       \medskip
+       
+       Similar to the linear DE, we want to find an integration factor $\mu (x,y)$ to construct an exact DE and consequently solve is by process form (a). The DE becomes 
+       \[
+       \mu M(x,y) + \mu N(x,y) \frac{dy}{dx} = 0
+       \]
+       and in order to make it exact, we need 
+       \[
+       (\mu M)_y = (\mu N)_x\,\,\implies\,\, \mu_y M + \mu M_y = \mu_x N + \mu N_x
+       \]
+       which is a PDE, difficult to solve and not aim for this course. So we try $\mu = \mu (x)$ and $\mu = \mu (y)$ which makes several terms above diminishes. \textcolor{red}{Q: Why we care about PDE? What we care about is whether they are equal or not?}\textcolor{blue}{A: Since we want to use this DE to solve $\mu$.}
+       
+       \end{enumerate}
+       
+       \medskip
+       
+       \item \textbf{Autonomous Equation}
+       
+       \medskip
+       
+       \theoremstyle{definition}
+       \begin{definition}
+       	Let $x = x(t)$ and $\frac{dx}{dt} = f$. If f is independent from from t, which is $f = f(x)$, then we call $\frac{dx}{dt} = f(x)$ \textit{autonomous equation}. If $f(x_0) = 0$, then $x_0$ is a \textit{fixed point}, and then $x(t) = x_0$ is a \textit{constant/equilibrium} solution. 
+       	
+       \end{definition}
+       Again, remember the solution of the DE is a function $x$ w.r.t $t$. So here the equilibrium solution is a constant function.
+       
+       \textcolor{blue}{Not finished yet}
+       
+       \medskip
+       
+       \item \textbf{Second order linear ODE}
+       
+       \medskip
+       
+     
+       	 The second order ODE is in form of 
+       	 \[
+       	 A(x) y'' + B(x)y' + c(x)y = F(x)\,\,\,\longrightarrow \,\,\,cy'' + p(x)y' + q(x)y = f(x)
+       	 \]
+       	 it is called homogeneous if $f(x) = 0 $ and non-homo if $f(x) \neq 0$. Linear means the equation involved the linear combination of $y^{(n)}$.
+      
+      \begin{theorem}{\textbf{Principle of superposition for homogeneous equations}}
+      
+      If $y_1(x)$ and $y_2(x)$ are solutions of the homogeneous equation
+      \[
+      y'' + p(x)y' + q(x)y = 0
+      \]
+      then so is $y(x) = c_1y_1(x)  + c_2 y_2(x)$, which is also the \textbf{general solution} of the ODE.
+      \end{theorem}
+      
+      \textcolor{blue}{proof needed to be made up which is in the notes}
+      
+      \medskip
+      
+      \begin{theorem}
+      	{\textbf{Unique existence}}
+      	Suppose p,q and f are continuous function on the interval I and $x_0 \in I$. Let $y_1,y_0 \in \mathcal{R}$. Then the Second order liner ODE (both homo and non-homo) with initial conditions 
+      	\[
+      	y(x_0) = y_0\,\,\,\&\,\,\,y'(x_0) = y_1
+      	\]
+      	has a unique solution $y(x)$ on the entire interval I.
+      \end{theorem}
+      What need to be notice is that we need $k$ initial conditions for $k$th order differential equations.
+      
+      \medskip
+      
+      \begin{enumerate}
+      
+      \item \textbf{The method fo Redution of Order} 
+      
+      
+      \medskip
+      
+      If a solution $y_1(x)$ is known for th homo. ODE, then we can find a second solution $y_2(x)$ by proposing
+      \[
+      y_2(x) = y_1(x)\cdot v(x)
+      \]
+     It can be shown that $w = v'$ satisfies a first order linear  equation which we can solve. \textcolor{blue}{This method is general. It can be shown with the coefficient all as function of x. Need to be made up.}
+     
+     \medskip
+     
+     \item \textbf{Constant coefficient 2nd linear ODE}
+     
+     The form of this constant one is simply 
+     \[
+     ay'' + by' + cy = 0
+     \]
+     where $a$, $b$ and $c$ are all constant. Here we are motivated by 
+     \[
+     y'' - k^2 y = 0\,\,\, \longrightarrow \,\,\, y(x) = e^{2x}
+     \]
+     So we try $y(x) = e^{rx}$. Then the DE becomes 
+     \[
+     (ar^2 + br + c) e^{rx} = 0.
+     \]
+     which indicates 
+     \[
+     ar^2 + br + c = 0
+     \]
+     which is called the \textbf{characteristic equation.} 
+     
+     \medskip
+     
+     Since the char. eq is quadratic so we can use the common method to solve for the roots. It also have three cases for solutions:$b^2 - 4ac ><= 0$.
+     
+     \medskip
+     
+     For the case $b^2 - 4ac>0$ it is quite simple. Combining with the theorem above we can find the two solution $y_1$ and $y_2$ and consequently the general solution. Finally with the given initial conditions, we find $c_1$ and $c_2$. 
+     
+     
+     \medskip
+     
+     For the case $b^2 - 4ac=0$, two roots are the same. Then the general solution become
+     \[
+     y(x) = c_1e^{rx} + c_2\cdot x e^{rx}
+     \]
+     Then repeat the similar process as above.
+     
+     \medskip
+     
+     For the case $b^2 - 4ac < 0$, we should expect the complex solution which indeed is. No here we need some knowledge of complex number. By the solution of quadratic equations, we have the solution 
+     \[
+     r_1,r_2 = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+     \]
+     since $b^2 - 4ac < 0$, then we have
+     \[
+      = \frac{-b \pm \sqrt{4ac - b^2} \cdot i}{2a} = \frac{-b}{2a} \pm \frac{\sqrt{4ac - b^2}}{2a}i = \lambda \pm i\mu
+     \]
+     just use the greek letter for a simpler format. Then by the same reason that 
+     \[
+     y_0,y_1 = e^{(\lambda \pm i\mu) x}
+     \]
+     are solutions for DE, but we prefer real value solutions. So for $y_0 = e^{(\lambda + i\mu)x}$ we have 
+     \[
+     y_a = Re\,\, y_o = Re \, (e^{\lambda x} \cdot e^{i\mu \cdot x}) = Re[e^{\lambda x} (\cos (\mu \, x)+ i \cdot sin(\mu x))] = e^{\lambda x}\cos (\mu x)
+     \]
+     \[
+          y_b = Im \, y_0  = Im(...)  = e^{\lambda x} \sin (\mu x)
+     \]
+     Also for the case $y_1 = e^{(\lambda - i\mu)x}$. The result is 
+     \[
+          \bar{y}_a = e^{\lambda x} \cos (\mu x) = y_a
+     \]
+     \[
+          \bar{y}_b =  ce^{\lambda x} \sin (\mu x) = - y_b
+     \]
+     so the general solution become
+     \[
+     y(x) = c_1 \cdot  e^{\lambda x} \cos (\mu x) + c_2 \cdot e^{\lambda x} \sin (\mu x)
+     \]
+     \textit{解释：从向量空间角度理解，$y(x)$ 是DE的解，即}
+     \[
+     \mathcal{L} y = ay'' + b y' + c y = 0
+     \]
+     \textit{即，$\mathcal{L}$作为一个operator使得该DE等于零。为此，解的实部和虚部必须同时等于零。所以，令 $y_\alpha$ 是DE的一个解且a,b和c都是常数，则}
+     \[
+     \mathcal{L} y_\alpha = ay''_\alpha+ by'_\alpha + cy_\alpha = 0
+     \]
+     \[
+     \implies (Re \,\,\mathcal{L}y_\alpha = 0)\, \wedge \,(Im \,\,\mathcal{L}y_\alpha = 0)
+     \]
+     \[
+     \implies (\mathcal{L}(Re \,y_\alpha) = 0) \wedge (\mathcal{L}(Im \,y_\alpha) = 0)
+     \]
+     \[
+     \implies \mathcal{L}(y_1) = 0 \,\wedge \,\mathcal{L}(y_2) = 0
+     \]
+      \end{enumerate}
+      
+      
+      
+      \medskip
+      
+      \medskip
+      
+      
+      \textbf{Complex number relative in this course}
+      
+      \begin{enumerate}
+      
+      \item \textbf{Euler's equation}
+      
+      \medskip
+      
+      The formula for Euler's equation is 
+      \[
+      e^{it} = cos (t) + i sin(t)
+      \]
+      the proof is using Tyler's expansion, omit here \textcolor{blue}{make up later}. The Euler's identity is where $t=\pi$, then 
+      \[
+      e^{i\pi} = -1
+      \]
+       another property for complex number used here is 
+       \[
+       e^{a+bi} = e^{a} \cdot e^{ib} = e^a [cos(b) + i \sin (b)]
+       \]
+       An application for Euler's equation is to prove the double angle formula. 
+      
+      \end{enumerate}
+      
+      \medskip
+      
+      \item \textbf{Mechanical Vibration: Spring-Mass system}
+      
+      \medskip
+      
+      情境介绍： 一个质量为$m$的物块被一弹簧链接，固定在左侧墙体上。记起始位置为0，并以力向右侧抻直一定的距离。则令$x(t)$是一有正负的值，表示相对于起始位置0点的距离。对其进行受力分析之后，根据牛顿第二定律可得，
+      \[
+      ( ma = ) mx'' = F_{Spring} + F_{Damping} + F_{External Force}
+      \]
+      here we do not consider external force and
+      \circled{1} $F_{Spring} = kx$ \circled{2} $F_{Damping} = -cx'$ which is simply the air resistance \,\circled{3} $F_{ext} = 0$. Then we have 
+      \[
+      F_{Total} = mx'' + cx' + kx
+      \]
+      本质上是模拟了拉伸后松手时一刻及以后的运动模型。注意$m,k>0,c\geq 0$。
+      
+      \medskip
+      
+        \begin{enumerate}
+        
+        \item \textbf{Undamped case: c = 0}
+        
+        \medskip
+        
+        Consider $F=0$, \textcolor{blue}{What does it means for F=0?}. The equation becomes
+        \[
+        mx'' + kx = 0
+        \]
+        char. eq is $mr^2+ k = 0$, then $r = \pm \,\omega_0 i$, where $\omega_0 = \sqrt{\frac{k}{m}}$. Then the general solution becomes
+        \[
+        x(t) = c_1 cos(\omega_0 t) + c_2 sin(\omega_0 t)
+        \]
+        since $e^0=1$. $x$的表达式可以通过配方变成另一种形式，即
+        \[
+        A cos\,\omega t + B sin\. \omega t = R\cdot cos(\omega t + \delta)
+        \]
+        where $R = \sqrt{A^2 + B^2}$ and $cos(\delta) = \frac{A}{R}. sin(\delta) = \frac{B}{R}$. Then $R$ is called the amplitude and $\delta$ is called the 'phase shift'. 这个被用来计算amplitude 和 period (Period = $2\pi / \omega$).
+        
+        
+        \medskip 
+        
+        
+        \item \textbf{Damped case: c > 0}
+        
+        \medskip
+        
+        Still here let $F_{Total}$ equals zero. Then the equation becomes
+        \[
+         mx'' + cx' + kx = 0
+        \]
+        Our expect (truth): \circled{1} 由于能量损失，最后会回到原点。所以$\lim_{t\rightarrow \infty}x(t) = 0$\,\circled{2}For $0<c<<1$, small damping, thus slow decaying, solution still oscillates\,\circled{3} For $c>>1$, large damping, thus fast decay, solution does not oscillates.
+        
+        \medskip
+        
+        Then if we solve this equation, depending on $\Delta$ there are three cases. For $\Delta > 0$ and $\Delta = 0$ it is exactly same as others with the solution
+        \[
+        y_{\Delta > 0} = c_1 \cdot e^{r_1t} + c_2 \cdot e^{r_2t}
+        \]
+        \[
+        y_{\Delta = 0} = c_1 \cdot e^{rt} + c_2 \cdot x \cdot e^{rt}
+        \]
+        and for this two cases the solution does not oscillate (since not trig. terms). For the case $\Delta < 0$, we have 
+        \[
+        y_{\Delta <0} = c_1 \cdot e^{-\frac{c}{2m}} \cos(\omega t) + c_2  \cdot e^{-\frac{c}{2m}} \sin(\omega t)
+        \]
+        So the cases become: \circled{1}$\Delta < 0$ under damping \circled{2} $\Delta = 0$ critical damping \circled{3} $\Delta >0$ overdamping.注意当 $\Delta = 0$ 即 $c^2 - 4mk = 0$时，解出的$x(t)$ 没有虚部。因此也没有trig. terms，因此不会oscillating.
+        
+        \medskip
+        
+        \item \textbf{Non-homogeneous 2nd linear ODE}
+        The form of non-homo 2nd linear ODE is 
+        \[
+        \mathcal{L} y = A(t)y'' + B(t)y' + C(t)y = f(x)
+        \]
+        
+        \begin{theorem}
+        	\[
+        	y(t) = y_p(t) + y_c(t)
+        	\]
+        	where $y_c = c_1y_1(t) + c_2y_2(t)$ is the general solution of $\mathcal{L}y = 0$, which is the solution of its homo. ODE, we call it \textit{ the complementary homo. solution}.
+        	
+        
+        \end{theorem}
+        
+        
+        \end{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Method of Undetermined Coefficients}
+        
+        \medskip
+        
+        This is the first method to solve $y_p$ for a large class of $\mathcal{L}\,y = f$ where 
+        \[
+        \mathcal{L} y = a y'' + by' + cy = \sum_{n=1}^N p_n(t) \cdot e^{\alpha t}(c_1 cos(\beta t) + c_2 sin(\beta t)) = f(t)
+        \]
+        where $p_n(t)$ is the polynomial w.r.t $t$. The the solution $y_p$(the particular solution) should be in the similar form. So we divides the condition if $f(t)$ into different cases to see how to solve for $y_p(t)$ and then combine with its complementary homo. to get the general solution. 
+        
+        \medskip
+        
+        上述'in the similar form'指，比如$f(t)$是poly. 和 trig. 的乘积， 则$y_p$ 也应该是是poly. 和 trig. 的乘积；如果$f(t)$是exp.和pol.的乘积，则$y_p$也应该是poly. 和 trig. 的乘积。
+        
+        \medskip
+        
+        注意，当有poly的时候，假设的$y_p$应当是从其最高次到最低次的linear combination; 当涉及到 trig. function 时， 可能需要是$\sin$ 和 $\cos$ 的linear combination.\textcolor{red}{未完待续}
+        
+        \medskip
+        
+%        \begin{enumerate}
+%          \item \textbf{$f(t)$ = poly.(t)}
+%          
+%          \medskip
+%          
+%          In this case, when $f(t) = c_1 \cdot t^n + c_2 \cdot t^{n-1} + .... + c_0$, then we should try $y_p(t)$ of the same highest order of the poly, $f(t)$.  
+%        \end{enumerate}
+
+        \medskip
+        
+        \item \textbf{Forced oscillation and resonance}
+        
+        \medskip
+        
+        In this section we consider the 2nd ODE as 
+        \[
+        mx'' + cx' + kx = f(t) = F_0\cos(\omega t)
+        \]
+        which we specify the force in periodic form. Similar as before, we discuss in two cases -- damped and undamped.
+        
+        \begin{enumerate}
+        
+        \medskip
+         
+        \item \textbf{Undamped case: c = 0}
+        
+        \medskip
+        
+        The ODE becomes 
+        \[
+        m''x + kx = F_0\cos (\omega t)
+        \]
+        then we get the $x_c(t)$ is 
+        \[
+        x_c(t) = c_1 cos (\omega_0 t) + c_2 sin(\omega_0 t)
+        \]
+        where $\omega_0 = \sqrt{\frac{k}{m}}$ is the natural frequency. Then for the particular solution $x_p(t)$ we have 
+        \[
+        x_p(t) = A\cos(\omega t) + B \sin (\omega t)
+        \]
+        then if $\omega \neq \omega_0$, then it is the particular solution with the give I.C solving A and B; if $\omega = \omega_0$, then 
+        \[
+        x_p(t) = At \cos (\omega_0 t) + Bt \sin (\omega_0 t)
+        \]
+        Combine those two cases together we can see 
+        \begin{itemize}
+        	\item when $\omega \neq \omega_0$, amplitude = Bt which is growing in t
+        	\item when $\omega = \omega_0$, amplitude = $\frac{F_0}{m|\omega^2_0 - \omega^2|}$, which does not grow in t but get larger and larger as $\omega \rightarrow \omega_0$.
+        \end{itemize}
+        This is a phenomenon of \underline{resonance}（共振）.
+        
+        \medskip
+        
+        \item \textbf{Damped case: c > 0}
+        
+        \medskip
+        
+        The ODE becomes 
+        \[
+        mx'' + cx' + kx = F_0cos(\omega t)
+        \]
+        Then we figure out the case for $x_c(t)$ is one of the following: 
+        \begin{itemize}
+        	\item when $\Delta > 0$
+        	\[
+        	x_c(t) = c_1e^{r_1t} + c_2e^{r_2t}
+        	\]
+        	\item when $\Delta = 0$
+        	\[
+        	x_c(t) = Ae^{-\frac{c}{2m}t} + Bte^{-\frac{c}{2m}t}
+        	\]
+            \item when $\Delta < 0$
+            \[
+            x_c(t) = ae^{-\frac{c}{2m}t}\cos( \mu t) + be^{-\frac{c}{2m}t} \sin (\mu t)
+            \]
+            
+            \smallskip
+            
+            where $\mu = \frac{1}{2m} \sqrt{4mk - c^2}$.
+        \end{itemize}
+        Then the form of a particular solution is 
+        \[
+        x_p(t) = Acos(\omega t) + Bsin(\omega t)
+        \]
+        NO OVERLAP WITH $x_c(t)$ AT ALL, hence valid. Then combine those two cases together we have 
+        \[
+        x_g(t) = \underbrace{x_c(t)}_{Exp. decay} \,\,+ \underbrace{x_p(t)}_{Peri. persistent}
+        \]
+        so as $t \rightarrow \infty$ $x_c$ is negligible as the transient part and $x_p(t)$ still exists as the periodic part. 注意，the long time behaviour = steady periodic part 是由于 the given periodic forcing，与initial condition 无关。Notice some times we may use matrix to solve the parameter A and B.
+        \end{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Laplace transform} 
+        
+        \medskip
+        
+        \begin{definition}
+        	For a given function $f(t)$ defined for $t > 0$, its Laplace transform is another function $\mathcal{Lf}(s)$ defined by
+        	\[
+        	\mathcal{L}f(x) = \int^\infty_0\,f(t)e^{-st}\,ds
+        	\]
+        	where $s$ is a real parameter in the improrper integral.
+        \end{definition}
+        
+        Recall the definition for a convergence in improper integral, which is the limit for 
+        \[
+        \int^\infty_a g(t) \,dt =  \lim_{A \rightarrow \infty} \int ^A_a \, g(t) \,dt
+        \]
+        exists for all A, otherwise it diverges. 
+        
+        \smallskip
+        \theoremstyle{Remark}
+        \begin{remark}
+        	If $|g(t)| \leq h(t)$ and $\,\int_0^\infty h(t)\,dt $ converges, then $\int_0^\infty g(t) dt$ converges.
+        \end{remark}
+        
+        \medskip 
+        
+        Notice, for the Laplace transform, the larger the S, the smaller the integrand, the more likely to converge. The domain of $\mathcal{L}f(x)$ is the \textbf{set of $s$ that makes the integral converges}. It is usually an open interval $(a, \infty)$ for some a. 
+        
+        \begin{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Properties of Laplace transform}
+        
+        \begin{enumerate}
+        
+        \item It is a linear map (operator) which satisfies 
+        \[
+        \mathcal{L}\{c_1f + c_2 g\} = c_1 \mathcal{L}f + c_2 \mathcal{L}g
+        \]
+        
+        \item Not multiplicative, which is 
+        \[
+        \mathcal{L}\,f \cdot  \mathcal{L} \,g \,\, \neq \,\, \mathcal{L}\{fg\}
+        \]
+        \item Uniqueness \textcolor{red}{question}
+        
+        \end{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Inverse Laplace transform} 
+        
+        \medskip
+        
+        Simply defined as the inverse of Laplace transform. If $\mathcal{L}\{f(t)\} = F(s)$, then we define 
+        \[
+        \mathcal{L}^{-1} \{F(s)\} = f(t)
+        \] 
+        
+        
+        \item \textbf{First shifting property} 
+        
+        \medskip
+        
+        \begin{definition}
+        	If $\mathcal{L}\{f(t)\} = F(s)$, then 
+        	\[
+        	\mathcal{L}\{e^{-at} \cdot f(t)\} = F(s + a)
+        	\]
+        \end{definition}
+        
+        \begin{proof}
+        	\[
+        	\mathcal{L}\{e^{-at}f(t)\} = \int^\infty_0 \,f(t)e^{-at}\cdot e^{-st}\,dt = \int^\infty_0 f(t)e^{-t(s+a)} dt = F(s + a)
+        	\]
+        \end{proof}
+        Also, the inverse also satisfy s.t $\mathcal{L}^{-1}\{F(s + a)\} = e^{-at}f(t)$.
+        
+        
+        \medskip
+        
+        \item \textbf{Laplace transform of derivatives and ODEs}
+        
+        \medskip
+        
+        
+        \begin{lemma}
+        	\[
+        	\mathcal{L}\{f'\} = s\cdot \mathcal{L}\{f\} - f(0)
+        	\]
+        	and for $f''$, consequently we have
+        	\[
+        	\mathcal{L}\{f''\} = s^2\mathcal{L}\{f\} - sf(0) - f'(0)
+        	\]
+        \end{lemma}
+        This lemma can be used to solve the ODE. 
+        
+        \begin{lemma}(The second shifting law)
+        
+        Let $a \geq 0$. Then 
+        \[
+        \mathcal{L}\{u(t-a)f(t-a)\} = e^{-as} \cdot \mathcal{L}\{f(t)\}
+        \]
+        	
+        \end{lemma}
+        
+        The proof is simply using integral by substitution. 
+        \medskip
+        
+        \item \textbf{Heaviside Function 单位阶跃函数}
+        
+        \begin{definition}
+        	The Heaviside function is defined as 
+        	
+        	\medskip
+        	
+        	\[
+        	H(x) =
+        	\left\{
+                    \begin{aligned}
+                        0 \,\,, & \,\, x < 0 \\
+                        1 \,\,, \,\, & \,\, x > 0
+                    \end{aligned}
+                    \right.
+        	\]
+        \end{definition}
+        The middle point at $x = 0$ is not important. 单位跃阶函数用来计算有断点的step function 的拉普拉斯变换(piecewise continuous function). 
+        
+        \medskip 
+        
+        \medskip
+        
+        \underline{\textbf{Example:}} Find the L.T of the $u(t-a)$ and $f(t) = 1$ if $x \in (a,b)$ and $0$ otherwise.
+
+        \medskip
+        
+        \textbf{Answer: }
+        \[
+        \mathcal{L}\{u(t-a)\} = \int^\infty_0 u(t-a)e^{-st}\,dt = \int^\infty_a e^{-st} \,dt = -\frac{e^{-st}}{s}\,\bigg|^\infty_a = \frac{e^{-sa}}{s}
+        \]
+        Then for $f(t)$ we can rewrite the function into $f(t) = u(t - a) -u(t - b)$ then 
+        \[
+        \mathcal{L}\{f(t)\} = \mathcal{L}\{u(t -a)\} - \mathcal{L}\{u(t - b)\} = \frac{e^{-sa} - e^{-sb}}{s}
+        \]
+        
+        \medskip
+        
+        \underline{\textbf{Example:}} 
+        
+        \medskip
+        
+        \textbf{Answer: }
+       
+        
+        \medskip
+        
+        
+        \end{enumerate}
+        
+        \item \textbf{Convolution 卷积}
+        
+        \begin{definition}
+        	The convolution of the function $f$ and $g$ is defined as 
+        	\[
+        	f*g  = \int_{-\infty}^\infty f(t - \tau) g(\tau) \, d\tau
+        	\]
+        	which is equivalent to 
+        	\[
+        	f*g  = \int_{-\infty}^\infty g(t - \tau) f(\tau) \, d\tau
+        	\]
+        	which is commutativity which can be proved by change of variable. In 215 we assume the function f and g supports only on $[0,\infty)$, so the integral above supports only on $[0,t]$ which is 
+        	\[
+        	f*g  = \int_{0}^t f(t - \tau) g(\tau) \, d\tau
+        	\]
+        \end{definition}
+        The convolution has following properties: $\circled{1} f * g = g * f$ $\circled{2} (cf) * g = c(f * g) = f * cg$ $\circled{3} (f * g) * h = f * (g * h)$.
+        
+        \medskip
+        
+        \begin{theorem}
+        	\[
+        	\mathcal{L}\{f * g\} = F(s) \cdot G(s)
+        	\]
+        \end{theorem}
+        The proof simply involves double integral and using the change of variable. 
+        
+        \medskip
+        
+        \item \textbf{Dirac delta function and Impulse response}
+        
+        \medskip
+        
+        The somewhat formal definition is  
+        \[
+        \delta(t) = \lim_{\epsilon \rightarrow 0} d_\epsilon (t) \,\, \equiv \,\, \delta(t) = \left\{
+                    \begin{aligned}
+                        \infty \,\,, & \,\, t = 0 \\
+                        0 \,\,, \,\, & \,\, t \neq 0
+                    \end{aligned}
+                    \right.
+        \]
+        and it should satisfy 
+        \[
+        \int^\infty_{-\infty}\delta(t) dt = 1
+        \]
+        此处应该指出的是，如果给定区间内包含0，则积分结果等于1；如果区间不包含零则积分结果为0。另外，对于任意的连续函数$f(t)$,delta函数满足
+        \[
+        \int^b_a f(t)\delta(t)\,dt = f(0)
+        \]
+        we can define $\delta(t)$ rigorously as the linear map: $f(t) \mapsto f(0)$ \textcolor{red}{question}. Translate the rectangle to $d_\epsilon(t-a) \rightarrow \delta(t-a)$. \textcolor{red}{未完，先记住结论}
+        \[
+        \delta(t -a) = \frac{d}{dt} u(t-a)
+        \]
+        then the laplace transform is 
+        \[
+        \mathcal{L}\{\delta(t-a)\} = e^{-as}
+        \]
+        
+        \medskip
+        
+        \item \textbf{First order systems of DE}
+        
+        \smallskip
+        
+        The general form of a fist order DE system is 
+        \[
+        \frac{d}{dt} \overrightarrow{x} = P(t)\overrightarrow{x} + \overrightarrow{g}(t)
+        \]
+        where P(t) is a matrix. The system is said to be linear in $x$ if 
+        \[
+        F_j(t,x_1,...,x_n) = g_j(t) + p_{j1}(t)x_1 + p_{j2}(t)x_2+...+p_{jn}(t)x_n,\,\,\,j\in[1,n]
+        \]
+        where $j$ is the index of the $j$th equation and $n$ is the $n$th variable $x$.
+        
+        \begin{enumerate}
+        
+        \item \textbf{Solution Space}
+        
+        \smallskip
+        
+        Let $V$ be the set of all solution of a homogeneous system $\overrightarrow{x}' = P(t)\overrightarrow{x}$. Then the solution space is 
+        \[
+        V = \{
+             \overrightarrow{x}(t) :  \overrightarrow{x}' = P(t)\overrightarrow{x}, t \in (a,b)
+            \}
+        \]
+        As a vector space which consisting of all $x(t)$s' satisfying the equation, any linear combination of elements in it is also a solution. 
+        
+        \bigskip
+        
+        Now consider the non-homo system. 
+        
+        \begin{theorem}
+        	If $\overrightarrow{x}_p(t)$ is a particular solution of 
+        	\[
+        	\frac{d}{dt}\overrightarrow{x}(t) = P(t) \overrightarrow{x}(t) + \overrightarrow{g}(t)
+        	\]
+        	then every solution can be written as 
+        	\[
+        	\overrightarrow{x}(t) = \overrightarrow{x}_c(t) + \overrightarrow{x}_p(t)
+        	\]
+        \end{theorem}
+        
+        
+        \medskip
+        
+        \item \textbf{Fundamental matrix} 
+        
+        \smallskip
+        
+        For homogeneous system, let $\overrightarrow{x}_1(t)$, $\overrightarrow{x}_2(t)$ be two linearly independent solution to the system. Then we define the matrix 
+        \[
+        \underline{\overline{X}} = \left(\begin{array}{cc}
+     	a_1 & a_2\\
+     	b_1 & b_2\\
+        \end{array}\right)
+        \]
+        as fundamental matrix consisting of the column vector as $\overrightarrow{x}_1$ and $\overrightarrow{x}_2$.
+        \end{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Eigenvalue Method for Homo. Constant coefficient system}
+        
+        \smallskip
+        
+        Still consider the sysytem $\frac{d}{dt}\overrightarrow{x} = Ax$ where $A$ is constant real $n$ by $n$ matrix. The solution space is a $n$-dimensional vector space. We want to find a simple basis of V. We try $\overrightarrow{x} = e^{\lambda t}\overrightarrow{v}$, where $\overrightarrow{v}$ is a constant vector. We find
+        \[
+        \lambda e^{\lambda t} \overrightarrow{v}=A \,e^{\lambda t} \overrightarrow{v} \implies \lambda \overrightarrow{v} = A \overrightarrow{v}
+        \]
+        hence $\overrightarrow{v}$ is a eigenvector of $A$ with eigenvalue $\lambda$. So our strategy is to find all possible eigenvalues: real and distinct, repeated, complex.仍然通过之前的方法找到ODE的解，然后transfer到matrix中。
+        
+        \begin{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Complex eignvalue} 
+        
+        \smallskip
+        
+        \begin{lemma}
+        	If a real matrix A has an eigenvalue $\lambda$ with eigenvector $v$, then it also have a eigenvalue $\bar{\lambda}$ with corresponding eigenvector $\bar{v}$ which is simply the conjugate of $v$.
+        \end{lemma}
+        
+        \smallskip
+        
+        \begin{lemma}
+        	
+        	If $\overrightarrow{x} = y(t) + iz(t)$ is a complex valued solution to $\frac{d}{dt}\overrightarrow{x}$ where A is real. Then $y(t)$ and $z(t)$ are also real valued solutions. 
+        \end{lemma}
+        
+        \medskip
+        
+        \item \textbf{Repeated Eigenvalues}
+        
+        \smallskip
+        
+        Algebraic multiplicity of an eigenvalue is power $m$ of $\lambda$ in the char. equation $(\lambda - \lambda_n)^m$; and the geometric multiplicity is the maximum number of linearly independent eigenvector of $\lambda_n$. Notice, the $geo. multi.$ is always less than or equal to the $algb. multi.$.  
+        
+        \smallskip
+       
+       \begin{remark}
+       	In general, if $\lambda_1$ is a repeated eigenvalue(alg. multiplicity greater than 1) of matrix A with only one eigenvector $v_1$, in addition to $\overrightarrow{x}(t) = e^{\lambda_1 t}\overrightarrow{v}_1$, the second solution is in form of 
+       	\[
+       	\overrightarrow{x}_2(t) = e^{\lambda_1 t}(t\overrightarrow{v}_1 + \overrightarrow{v}_2)
+       	\]
+       	since we need 
+       	\[
+       	\overrightarrow{x}_2' = A\overrightarrow{x}_2
+       	\]
+       	we can get 
+       	\[
+       	(A - \lambda_1 I)\overrightarrow{v}_2 = \overrightarrow{v}_1
+       	\]
+       	use this to find $\overrightarrow{v}_2$. For example, we have already known A has two egi. value $\lambda_1, lambda_2$ and $\lambda_2$ is repeated. Then 
+       	\[
+       	\overrightarrow{x}_c(t) = c_1e^{\lambda_1 t}\overrightarrow{v}_1 + c_2e^{\lambda_2 t}\overrightarrow{v}_2 + c_3e^{\lambda_2 t}(t\overrightarrow{v_1} + \overrightarrow{v}_2)
+       	\]
+%       	通解是几个解的线性组合\textcolor{red}{不尽准确 考试后搞清楚}
+       \end{remark}
+        
+        \end{enumerate}
+        
+        \medskip
+        
+        \item \textbf{Phase portrait for 2D linear system}
+        
+        \smallskip
+        
+        Consider $\overrightarrow{x}(t) \in \mathcal{R}^2$ and $A \in M(2 \times 2, \mathcal{R})$. Each solution to $\overrightarrow{x}' = A \overrightarrow{x}$ form a trajectory in $\mathcal{R}^2$. Notice the trajectory of $y(t) = \overrightarrow{x}(t _C)$ is the same as $\overrightarrow{x}(t)$. In phase portrait we consider all trajectory in $\mathcal{R}^2$. We have 3 cases: $\lambda_1 < \lambda_2$ real unique, $\lambda_1 = \bar{\lambda_2}$ complex conjugate and $\lambda_1 = \lambda_2$ repeated.
+        
+        \bigskip
+        
+        \underline{\textit{Case1(a)}: $\lambda_1 < \lambda_2 < 0$ (sink)}
+        
+        \smallskip
+        
+        \underline{\textit{Case1(b)}: $0 < \lambda_1 < \lambda_2$ (source)}
+        
+        \smallskip
+        
+        \underline{\textit{Case1(a)}: $\lambda_1 < 0 < \lambda_2$ (saddle)}
+        
+        \smallskip
+        
+        
+        \smallskip
+        
+        \underline{\textit{Case2(b)}: $\lambda_1, \lambda_2 = a + bi, 0 < a < b $ (spiral source)}
+        
+        \smallskip
+        
+        \underline{\textit{Case2(c)}: $\lambda_1, \lambda_2 = a + bi,  a < 0 < b $ (spiral sink)}
+        
+        \smallskip
+        
+        \underline{\textit{Case3}: $\lambda_1 = \lambda_2 \neq 0 $ (hard to draw)}
+        
+        
+     \bigskip
+
+     \item \textbf{Nonhomo. System}
+
+     \medskip
+     
+     The form is simply 
+     \[
+     \frac{d}{dt}\overrightarrow{x} = P(t)\overrightarrow{x} + \overrightarrow{f}(t)
+     \]
+     recall fundamental matrix, it satisfies 
+     \[
+     \fundmx{a} '= P \fundmx{a}
+     \]
+     
+     \begin{enumerate}
+     
+     \item \textbf{Variation of Parameter method}
+     
+     \[
+     \overrightarrow{x}_t = \int^t \,\fundmx{a}^{-1}(s)f(s)\,ds
+     \]
+     this is the most general method to solve the solution, even though the matrix is time dependent. 
+     
+     \medskip
+     
+     \item \textbf{Undetermined coefficient}
+     
+     \smallskip
+     
+     Exactly the same as the previous case. We first solve the homo case and guess the particular solution corresponding to the term $\overrightarrow{f}$ and also check whether it is overlapping with the homo solution.
+     \end{enumerate}
+     
+     \medskip
+     
+     \item \textbf{Non linear system}
+        
+        Here we just talk about the autonomous non linear system, which is 
+        \[
+        \frac{d}{dt} \overrightarrow{x} = \overrightarrow{F}(x,y) 
+        \]
+        where F does not depends on t containing just x and y. Notice $\overrightarrow{x} =(x, y)^T $. Critical point = equilibrium = fixed point and it means, let $\overrightarrow{x}_0$ is a fixed point then
+        \[
+        \overrightarrow{F}(\overrightarrow{x}_0) = 0
+        \]
+        
+        \medskip
+        
+        \begin{enumerate}
+        
+        \item \textbf{Linearization in two dimensional case}
+        
+        We focus one the behavior around the fixed point, so we find the linearization by Taylor expansion (two dimension). Let $p_0 = (x_0, y_0)$ be the fixed point then
+        \[
+        f(x,y) = f(x_0,y_0) + f_x(p)(x - x_0) + f_y(p)(y - y_0) + h.o.t
+        \] 
+        \[
+        g(x,y) = f(x_0,y_0) + g_x(p)(x - x_0) + g_y(p)(y - y_0) + h.o.t
+        \]
+        hot means higher order term. Then we use the jacobin matrix 
+        \[
+        \frac{d}{dt} \left[
+                           \begin{matrix}
+                           	u\\
+                           	v\\
+                           \end{matrix}
+                           \right] 
+         = \frac{d}{dt} \left[
+                           \begin{matrix}
+                           	x\\
+                            y\\
+                           \end{matrix}
+                        \right]
+                        = \left[
+                            \begin{matrix}
+                            	f_x & f_y\\
+                            	g_x & g_y\\
+                            \end{matrix}
+                          \right]
+                          \newmatrix{u}{v} + h.o.t           
+        \]
+        in short
+        \[
+        \frac{d}{dt} \newmatrix{u}{v} = J(p)\newmatrix{u}{v}
+        \]
+        where $u = x - x_0$ and $v = y - y_0$.
+        \end{enumerate}
+ \end{enumerate} 
+        
+        
+        
+    
+    
+   
+
+
+\end{changemargin}
+
+\end{document}
